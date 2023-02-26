@@ -5,9 +5,13 @@ import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
 import {Form, ErrorFormik, Button} from './Form.styled';
 
+const phoneRegExp = /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/;
+
 const Schema = yup.object().shape({
     name: yup.string("Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan").required(),
-    number: yup.number().required(),
+    number: yup.string()
+    .matches(phoneRegExp, 'Phone number is not valid')
+    .required('Please, enter phone number'),
   });
 
 export const ContactsForm = ({onSave, contacts}) => {
