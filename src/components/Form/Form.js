@@ -20,17 +20,12 @@ export const ContactsForm = ({onSave, contacts}) => {
         initialValues={{ contacts: [], name: '', number: '' }}
         validationSchema = {Schema}
         onSubmit={(values, actions) => {
-            if(contacts.find(contact => contact.name === values.name)){
-              alert(`${values.name} is already in contacts!`)
-            }else{
-              onSave({
-                id: nanoid(),
-                name: values.name, 
-                number: values.number,
-              });
-            }
-            
-            actions.resetForm();
+          onSave({
+            id: nanoid(),
+            name: values.name, 
+            number: values.number,
+          });
+          actions.resetForm();
         }}>
           <Form>
             <label htmlFor="name">Name</label>
